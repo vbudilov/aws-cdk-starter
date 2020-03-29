@@ -9,8 +9,10 @@ public class LiveStreamingApp {
         App app = new App();
 
 
+        DDBUserTableStack ddbUserTableStack = new DDBUserTableStack(app, "UsersTable");
+
         try {
-            new CognitoStack(app, "LiveDataStreaming");
+            new CognitoStack(app, "LiveDataStreaming", null, ddbUserTableStack.getTableName());
         } catch (Exception exc) {
             exc.printStackTrace();
         }

@@ -45,6 +45,8 @@ exports.handler = async (event, context) => {
 
     const tableName = process.env.TABLE_NAME;
     const region = process.env.REGION;
+    const partitionId = process.env.PARTITION_ID;
+    const sortKey = process.env.SORT_KEY;
 
     console.log(`table=${tableName} -- region=${region}`)
 
@@ -61,8 +63,8 @@ exports.handler = async (event, context) => {
     const ddbParams = {
         TableName: tableName,
         Item: {
-            'userId': {S: event.request.userAttributes.sub},
-            'sortKey': {S: "user"},
+            partitionId: {S: event.request.userAttributes.sub},
+            sortKey: {S: "user"},
             'email': {S: event.request.userAttributes.email},
             'createdDate': {S: date.toISOString()},
             'firstLogin': {BOOL: true}

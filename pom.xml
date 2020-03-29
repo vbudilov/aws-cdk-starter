@@ -47,7 +47,11 @@
             <artifactId>ec2</artifactId>
             <version>1.30.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>dynamodb</artifactId>
+            <version>1.30.0</version>
+        </dependency>
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codepipeline</artifactId>
