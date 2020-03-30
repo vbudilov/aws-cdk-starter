@@ -1,5 +1,6 @@
 package com.budilov.cdk;
 
+import com.budilov.cdk.util.Properties;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
@@ -13,12 +14,13 @@ public class DDBUserTableStack extends Stack {
         this(scope, id, null);
     }
 
-    Table table = null;
+    final public Table usersTable;
+    final public Table tickerTable;
 
     public DDBUserTableStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
-        table = new Table(this, Properties.DDB_USERS_TABLE, TableProps.builder()
+        usersTable = new Table(this, Properties.DDB_USERS_TABLE, TableProps.builder()
                 .partitionKey(Attribute.builder()
                         .name(Properties.DDB_USERS_TABLE_PARTITION_ID)
                         .type(AttributeType.STRING)
@@ -29,13 +31,16 @@ public class DDBUserTableStack extends Stack {
                         .build())
                 .build());
 
-
+        tickerTable = new Table(this, Properties.DDB_TICKERS_TABLE, TableProps.builder()
+                .partitionKey(Attribute.builder()
+                        .name(Properties.DDB_TICKERS_TABLE_PARTITION_ID)
+                        .type(AttributeType.STRING)
+                        .build())
+                .sortKey(Attribute.builder()
+                        .name(Properties.DDB_TICKERS_TABLE_SORT_KEY)
+                        .type(AttributeType.STRING)
+                        .build())
+                .build());
     }
 
-    public String getTableName() {
-        if (table != null)
-            return table.getTableName();
-        else
-            return "UNKNOWN";//todo: better to throw an exception here
-    }
 }

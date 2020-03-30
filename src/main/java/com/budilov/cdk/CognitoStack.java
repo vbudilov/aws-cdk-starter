@@ -1,5 +1,6 @@
 package com.budilov.cdk;
 
+import com.budilov.cdk.util.Properties;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;

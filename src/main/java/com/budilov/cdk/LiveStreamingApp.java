@@ -5,17 +5,17 @@ import software.amazon.awscdk.core.App;
 public class LiveStreamingApp {
 
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws Exception {
         App app = new App();
 
-
+        // DynamoDB Stack
         DDBUserTableStack ddbUserTableStack = new DDBUserTableStack(app, "UsersTable");
 
-        try {
-            new CognitoStack(app, "LiveDataStreaming", null, ddbUserTableStack.getTableName());
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
+        // Kinesis
+        KinesisStreamsStack kinesisStreamsStack = new KinesisStreamsStack(app, "KinesisStream");
+
+        // Cognito
+        CognitoStack cognitoStack = new CognitoStack(app, "LiveDataStreaming", null, ddbUserTableStack.usersTable.getTableName());
 
         app.synth();
     }
