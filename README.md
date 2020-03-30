@@ -5,14 +5,26 @@ I create apps and deployments all of the time. I use different tools for differe
 to deploy Lambda functions, sometimes SAM. In some cases I used Terraform to create other resources, and it others I just did it manually. 
 This project is going to help me (and hopefully you) to automate some of those resource creations.
 
-
 The idea is to build out an app (details will come later) that facilitates data ingestion using Kinesis, EKS, DDB, and other 
 popular AWS services.
 
 #### What does it do now
-1. Creates a Cognito User Pool with a Lambda function that copies newly-confirmed users to DynamoDB (whose Construct I haven't created yet)
+- [x] Cognito Stack
+- [x] Cognito Stack Lambda Triggers
+- [x] DynamoDB Users & Ticker Table
+- [ ] ElasticSearch service
+- [ ] S3 Bucket (for SPA hosting)
+- [ ] SPA CodePipeline
+- [ ] EKS (maybe)
 
-## Useful commands
+#### Deployment
+```
+mvn package
+cdk synth
+cdk deploy
+```
+
+###### Useful commands
 
  * `mvn package`     compile and run tests
  * `cdk ls`          list all stacks in the app

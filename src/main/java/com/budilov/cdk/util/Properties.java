@@ -11,4 +11,7 @@ public class Properties {
     public static String DDB_USERS_TABLE_PARTITION_ID = "userId";
     public static String DDB_USERS_TABLE_SORT_KEY = "sortKey";
 
+    public static String KINESIS_STREAM_NAME = "MyStream";
+    public static int KINESIS_STREAM_SHARD_COUNT = 1;
+
 }
