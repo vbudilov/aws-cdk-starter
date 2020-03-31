@@ -17,7 +17,7 @@ popular AWS services.
 - [x] Kinesis Stream
 - [ ] S3 Bucket (for SPA hosting)
 - [ ] SPA CodePipeline
-- [ ] EKS (maybe)
+- [ ] EKS (maybe...using eksctl for now)
 - [ ] Saving endpoints into the Parameter Store (for discovery)
 
 #### Deployment
