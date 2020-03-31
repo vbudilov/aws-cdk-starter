@@ -45,7 +45,7 @@ public class Properties {
             for (Map.Entry<String, String> entry : replacements.entrySet()) {
                 resourceFile = resourceFile.replaceAll(entry.getKey(), entry.getValue());
             }
-        System.out.println(resourceFile);
+//        System.out.println(resourceFile);
 
         return resourceFile;
     }
