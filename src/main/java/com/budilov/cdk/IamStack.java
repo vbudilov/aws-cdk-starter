@@ -1,19 +1,17 @@
 package com.budilov.cdk;
 
 import com.budilov.cdk.util.Properties;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.elasticsearch.CfnDomain;
-import software.amazon.awscdk.services.iam.*;
+import software.amazon.awscdk.services.iam.CompositePrincipal;
+import software.amazon.awscdk.services.iam.ManagedPolicy;
+import software.amazon.awscdk.services.iam.Role;
+import software.amazon.awscdk.services.iam.ServicePrincipal;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class IamStack extends Stack {
 
