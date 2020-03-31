@@ -12,10 +12,13 @@ popular AWS services.
 - [x] Cognito Stack
 - [x] Cognito Stack Lambda Triggers
 - [x] DynamoDB Users & Ticker Table
-- [ ] ElasticSearch service
+- [x] ElasticSearch service
+- [x] IAM role to access Elasticsearch
+- [x] Kinesis Stream
 - [ ] S3 Bucket (for SPA hosting)
 - [ ] SPA CodePipeline
 - [ ] EKS (maybe)
+- [ ] Saving endpoints into the Parameter Store (for discovery)
 
 #### Deployment
 ```
