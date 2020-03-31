@@ -25,7 +25,7 @@ public class Properties {
     public static String KINESIS_STREAM_NAME = "MyStream";
     public static int KINESIS_STREAM_SHARD_COUNT = 1;
 
-    public static String ES_NAME = "LSES";
+    public static String ES_NAME = "lselastic";
     // This is the role that will have access to the ES cluster
     public static String ES_ALLOWED_ROLE_NAME = "LiveStreamingRoleToElasticSearch";
     public static String ES_VERSION = "6.8";

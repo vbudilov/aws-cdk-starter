@@ -33,13 +33,13 @@ public class ElasticsearchStack extends Stack {
 //                        .dedicatedMasterCount(2)
 //                        .dedicatedMasterEnabled(true)
                         .build())
-                .accessPolicies(PolicyDocument.fromJson(Properties.readResourceFileContents("elasticsearch-access-policy.json",
-                        Map.of("ACCOUNT_NAME_REPLACE_ME", Properties.ACCOUNT,
-                                "ROLE_NAME_REPLACE_ME", Properties.ES_ALLOWED_ROLE_NAME,
-                                "REGION_REPLACE_ME", Properties.REGION,
-                                "ES_DOMAIN_NAME_REPLACE_ME", Properties.ES_NAME,
-                                "EXTERNAL_IP_ADDRESS_REPLACE_ME", getMyExternalIP() // For testing purposes
-                        ))))
+//                .accessPolicies(PolicyDocument.fromJson(Properties.readResourceFileContents("elasticsearch-access-policy.json",
+//                        Map.of("ACCOUNT_NAME_REPLACE_ME", Properties.ACCOUNT,
+//                                "ROLE_NAME_REPLACE_ME", Properties.ES_ALLOWED_ROLE_NAME,
+//                                "REGION_REPLACE_ME", Properties.REGION,
+//                                "ES_DOMAIN_NAME_REPLACE_ME", Properties.ES_NAME,
+//                                "EXTERNAL_IP_ADDRESS_REPLACE_ME", getMyExternalIP() // For testing purposes
+//                        ))))
                 .ebsOptions(CfnDomain.EBSOptionsProperty.builder()
                         .ebsEnabled(true)
                         .volumeType("standard")
