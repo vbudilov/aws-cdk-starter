@@ -1,5 +1,12 @@
 package com.budilov.cdk.util;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Map;
+
 public class Properties {
 
     public static String REGION = "us-east-1";
@@ -18,4 +25,28 @@ public class Properties {
     public static String KINESIS_STREAM_NAME = "MyStream";
     public static int KINESIS_STREAM_SHARD_COUNT = 1;
 
+    public static String ES_NAME = "LSES";
+    // This is the role that will have access to the ES cluster
+    public static String ES_ALLOWED_ROLE_NAME = "LiveStreamingRoleToElasticSearch";
+    public static String ES_VERSION = "6.8";
+    public static String ES_INSTANCE_TYPE = "m5.large.elasticsearch";
+    public static int ES_INSTANCE_COUNT = 1;
+
+
+    public static String readResourceFileContents(@NotNull String fileName, Map<String, String> replacements) throws IOException {
+
+        File file = new File(
+                Properties.class.getClassLoader().getResource(fileName).getFile()
+        );
+
+        String resourceFile = new String(Files.readAllBytes(file.toPath()));
+
+        if (replacements != null)
+            for (Map.Entry<String, String> entry : replacements.entrySet()) {
+                resourceFile = resourceFile.replaceAll(entry.getKey(), entry.getValue());
+            }
+        System.out.println(resourceFile);
+
+        return resourceFile;
+    }
 }

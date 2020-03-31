@@ -20,5 +20,5 @@ module.exports.confirm = (event, context, callback) => {
     }
 
     // Throw an error if invoked from the wrong trigger
-    callback(`Misconfigured Cognito Trigger ${ event.triggerSource }`)
+    callback(`Misconfigured Cognito Trigger ${event.triggerSource}`)
 };

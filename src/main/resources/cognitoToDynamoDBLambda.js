@@ -48,9 +48,9 @@ exports.handler = async (event, context) => {
     const partitionId = process.env.PARTITION_ID;
     const sortKey = process.env.SORT_KEY;
 
-    console.log(`table=${tableName} -- region=${region}`)
+    console.log(`table=${tableName} -- region=${region}`);
 
-    aws.config.update({ region });
+    aws.config.update({region});
 
     if (!event.request.userAttributes.sub) {
         // Nothing to do, the user's email ID is unknown
@@ -79,6 +79,6 @@ exports.handler = async (event, context) => {
         console.log("Error", err);
     }
 
-    console.log("Success: Everything executed correctly")
+    console.log("Success: Everything executed correctly");
     context.done(null, event);
 };

@@ -17,6 +17,9 @@ public class LiveStreamingApp {
         // Cognito
         CognitoStack cognitoStack = new CognitoStack(app, "LiveDataStreaming", null, ddbUserTableStack.usersTable.getTableName());
 
+        // Elasticsearch service
+//        ElasticsearchStack elasticsearchStack = new ElasticsearchStack(app, "LiveStreamingES");
+
         app.synth();
     }
 }

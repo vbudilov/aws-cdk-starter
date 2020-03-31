@@ -10,12 +10,12 @@ import software.amazon.awscdk.services.dynamodb.Table;
 import software.amazon.awscdk.services.dynamodb.TableProps;
 
 public class DDBUserTableStack extends Stack {
+    final public Table usersTable;
+    final public Table tickerTable;
+
     public DDBUserTableStack(final Construct scope, final String id) {
         this(scope, id, null);
     }
-
-    final public Table usersTable;
-    final public Table tickerTable;
 
     public DDBUserTableStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
