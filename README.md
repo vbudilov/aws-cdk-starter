@@ -1,5 +1,10 @@
 # Collection of useful CDK Stacks
 
+### Author: Vladimir Budilov
+* [LinkedIn](https://www.linkedin.com/in/vbudilov/)
+* [Medium](https://medium.com/@budilov)
+* [Twitter](https://twitter.com/VladimirBudilov)
+
 #### Why
 I create apps and deployments all of the time. I use different tools for different scenarios. Sometimes I use the Serverless framework
 to deploy Lambda functions, sometimes SAM. In some cases I used Terraform to create other resources, and it others I just did it manually. 
