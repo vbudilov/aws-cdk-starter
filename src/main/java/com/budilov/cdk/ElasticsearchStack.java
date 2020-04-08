@@ -6,12 +6,13 @@ import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.elasticsearch.CfnDomain;
-import software.amazon.awscdk.services.iam.PolicyDocument;
+import software.amazon.awscdk.services.iam.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 public class ElasticsearchStack extends Stack {
@@ -36,7 +37,7 @@ public class ElasticsearchStack extends Stack {
                         .build())
                 .accessPolicies(PolicyDocument.fromJson(new ObjectMapper().readValue(Properties.readResourceFileContents("elasticsearch-access-policy.json",
                         Map.of("ACCOUNT_NAME_REPLACE_ME", Properties.ACCOUNT,
-                                "ROLE_NAME_REPLACE_ME", Properties.ES_ALLOWED_ROLE_NAME,
+                                "ROLE_NAME_REPLACE_ME", Properties.ES_ALLOWED_ROLE_NAME, // can't use the actual instance object's role here for some reason...no idea why for now
                                 "REGION_REPLACE_ME", Properties.REGION,
                                 "ES_DOMAIN_NAME_REPLACE_ME", Properties.ES_NAME,
                                 "EXTERNAL_IP_ADDRESS_REPLACE_ME", getMyExternalIP() // For testing purposes

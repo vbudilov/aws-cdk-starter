@@ -13,19 +13,19 @@ import software.amazon.awscdk.services.iam.ServicePrincipal;
 import java.io.IOException;
 import java.util.List;
 
-public class IamStack extends Stack {
+public class ElasticsearchIamStack extends Stack {
 
-    public CfnDomain esDomain;
+    public static Role esAccessRole;
 
-    public IamStack(final Construct scope, final String id) throws IOException {
+    public ElasticsearchIamStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null);
     }
 
-    public IamStack(final Construct scope, final String id, final StackProps props) throws IOException {
+    public ElasticsearchIamStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
 
         // ES Access Role
-        Role esAccessRole = Role.Builder.create(this, Properties.ES_ALLOWED_ROLE_NAME)
+        esAccessRole = Role.Builder.create(this, Properties.ES_ALLOWED_ROLE_NAME)
                 .assumedBy(
                         new CompositePrincipal(
                                 ServicePrincipal.Builder.create("lambda").build(),

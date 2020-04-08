@@ -52,13 +52,12 @@
             <artifactId>dynamodb</artifactId>
             <version>1.31.0</version>
         </dependency>
+        <!--        CodeTools-->
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codepipeline</artifactId>
             <version>1.31.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codebuild</artifactId>
@@ -100,7 +99,7 @@
             <version>1.31.0</version>
         </dependency>
 
-<!--        SSM -->
+        <!--        SSM -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ssm</artifactId>
