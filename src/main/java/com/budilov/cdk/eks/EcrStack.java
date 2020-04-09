@@ -6,6 +6,8 @@ import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.ecr.LifecycleRule;
 import software.amazon.awscdk.services.ecr.Repository;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +40,14 @@ public class EcrStack extends Stack {
                         .maxImageCount(9999)
                         .build())
                 )
+                .build();
+
+        StringParameter.Builder.create(this, "dataIngestGatewayEcr")
+                .allowedPattern(".*")
+                .description("dataIngestGatewayEcr")
+                .parameterName("dataIngestGatewayEcr")
+                .stringValue(dataIngestGateway.getRepositoryName())
+                .tier(ParameterTier.STANDARD)
                 .build();
 
     }

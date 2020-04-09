@@ -7,6 +7,8 @@ import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.elasticsearch.CfnDomain;
 import software.amazon.awscdk.services.iam.*;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +50,22 @@ public class ElasticsearchStack extends Stack {
                         .volumeSize(10)
                         .build())
                 .advancedOptions(Map.of())
+                .build();
+
+        StringParameter.Builder.create(this, "esDomain")
+                .allowedPattern(".*")
+                .description("esDomain")
+                .parameterName("esDomain")
+                .stringValue(esDomain.getDomainName())
+                .tier(ParameterTier.STANDARD)
+                .build();
+
+        StringParameter.Builder.create(this, "esDomainEndpoint")
+                .allowedPattern(".*")
+                .description("esDomainEndpoint")
+                .parameterName("esDomainEndpoint")
+                .stringValue(esDomain.getAttrDomainEndpoint())
+                .tier(ParameterTier.STANDARD)
                 .build();
 
     }

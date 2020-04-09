@@ -8,6 +8,8 @@ import software.amazon.awscdk.services.dynamodb.Attribute;
 import software.amazon.awscdk.services.dynamodb.AttributeType;
 import software.amazon.awscdk.services.dynamodb.Table;
 import software.amazon.awscdk.services.dynamodb.TableProps;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 public class DDBUserTableStack extends Stack {
     final public Table usersTable;
@@ -41,6 +43,23 @@ public class DDBUserTableStack extends Stack {
                         .type(AttributeType.STRING)
                         .build())
                 .build());
+
+        StringParameter.Builder.create(this, "usersTable")
+                .allowedPattern(".*")
+                .description("usersTable")
+                .parameterName("usersTable")
+                .stringValue(usersTable.getTableName())
+                .tier(ParameterTier.STANDARD)
+                .build();
+
+
+        StringParameter.Builder.create(this, "tickerTable")
+                .allowedPattern(".*")
+                .description("tickerTable")
+                .parameterName("tickerTable")
+                .stringValue(tickerTable.getTableName())
+                .tier(ParameterTier.STANDARD)
+                .build();
     }
 
 }

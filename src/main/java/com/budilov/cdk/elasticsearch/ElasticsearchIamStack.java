@@ -9,6 +9,8 @@ import software.amazon.awscdk.services.iam.CompositePrincipal;
 import software.amazon.awscdk.services.iam.ManagedPolicy;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,6 +41,14 @@ public class ElasticsearchIamStack extends Stack {
                 .roleName(Properties.ES_ALLOWED_ROLE_NAME)
                 .build();
 
+
+        StringParameter.Builder.create(this, "esDomainIAM")
+                .allowedPattern(".*")
+                .description("esDomainIAM")
+                .parameterName("esDomainIAM")
+                .stringValue(esAccessRole.getRoleName())
+                .tier(ParameterTier.STANDARD)
+                .build();
 
     }
 

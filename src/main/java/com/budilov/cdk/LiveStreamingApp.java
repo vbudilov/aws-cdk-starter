@@ -3,6 +3,7 @@ package com.budilov.cdk;
 import com.budilov.cdk.eks.EcrStack;
 import com.budilov.cdk.elasticsearch.ElasticsearchIamStack;
 import com.budilov.cdk.elasticsearch.ElasticsearchStack;
+import com.budilov.cdk.util.SSM;
 import software.amazon.awscdk.core.App;
 
 public class LiveStreamingApp {
@@ -30,6 +31,11 @@ public class LiveStreamingApp {
         // ECR
         EcrStack ecrStack = new EcrStack(app, "EcrStack");
 
+
+
+
         app.synth();
+
+
     }
 }

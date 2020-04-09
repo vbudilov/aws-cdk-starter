@@ -5,6 +5,8 @@ import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.iam.*;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +25,7 @@ public class EksIamStack extends Stack {
     public EksIamStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
 
-        // ES Access Role
+        // Data Ingest Gateway Access Role
         eksDataIngestGatewayRole = Role.Builder.create(this, Properties.DATA_INGEST_GATEWAY_ROLE)
                 .assumedBy(
                         new CompositePrincipal(
@@ -35,6 +37,13 @@ public class EksIamStack extends Stack {
                 .roleName(Properties.DATA_INGEST_GATEWAY_ROLE)
                 .build();
 
+        StringParameter.Builder.create(this, "eksDataIngestGatewayRole")
+                .allowedPattern(".*")
+                .description("eksDataIngestGatewayRole")
+                .parameterName("eksDataIngestGatewayRole")
+                .stringValue(eksDataIngestGatewayRole.getRoleName())
+                .tier(ParameterTier.STANDARD)
+                .build();
     }
 
 }

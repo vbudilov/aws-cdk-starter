@@ -12,6 +12,10 @@ import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.FunctionProps;
 import software.amazon.awscdk.services.lambda.Runtime;
+import software.amazon.awscdk.services.secretsmanager.Secret;
+import software.amazon.awscdk.services.secretsmanager.SecretStringGenerator;
+import software.amazon.awscdk.services.ssm.ParameterTier;
+import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +31,9 @@ public class CognitoStack extends Stack {
     public CognitoStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null, Properties.DDB_USERS_TABLE);
     }
+
+    UserPool pool;
+    UserPoolClient upClient;
 
     public CognitoStack(final Construct scope, final String id, final StackProps props, final String usersTableName) throws IOException {
         super(scope, id, props);
@@ -47,7 +54,7 @@ public class CognitoStack extends Stack {
                 .code(Code.fromInline(getLambdaFunctionFromFile("cognitoAutoConfirmUser")))
                 .build());
 
-        UserPool pool = UserPool.Builder.create(this, "MyPool")
+        pool = UserPool.Builder.create(this, "MyPool")
                 .userPoolName("myPool")
                 .selfSignUpEnabled(true)
                 .lambdaTriggers(UserPoolTriggers.builder()
@@ -59,11 +66,36 @@ public class CognitoStack extends Stack {
 //                        .emailBody(Properties.COGNITO_EMAIL_VERIFICATION_BODY).build())
                 .build();
 
-        UserPoolClient upClient = UserPoolClient.Builder.create(this, "MyPoolClient")
+        upClient = UserPoolClient.Builder.create(this, "MyPoolClient")
                 .userPoolClientName("webClient")
                 .userPool(pool)
                 .generateSecret(false)
                 .build();
+
+        StringParameter.Builder.create(this, "cognitoPoolIdSecret")
+                .allowedPattern(".*")
+                .description("cognitoPoolIdSecret")
+                .parameterName("cognitoPoolIdSecret")
+                .stringValue(this.pool.getUserPoolId())
+                .tier(ParameterTier.STANDARD)
+                .build();
+
+        StringParameter.Builder.create(this, "cognitoPoolClientIdSecret")
+                .allowedPattern(".*")
+                .description("cognitoPoolClientId")
+                .parameterName("cognitoPoolClientId")
+                .stringValue(this.upClient.getUserPoolClientId())
+                .tier(ParameterTier.STANDARD)
+                .build();
+
+//        CfnOutput output = CfnOutput.Builder.create(this, "OutputName")
+//                .value(this.pool.getUserPoolId())
+//                .description("The name of an S3 bucket")
+//                .exportName("cognitoPoolId")
+//                .build();
+
+//        SSM.addParameter("cognitoPoolId", this.pool.getUserPoolId());
+//        SSM.addParameter("cognitoPoolClientId", this.upClient.getUserPoolClientId());
 
     }
 
