@@ -1,4 +1,4 @@
-package com.budilov.cdk;
+package com.budilov.cdk.elasticsearch;
 
 import com.budilov.cdk.util.Properties;
 import com.fasterxml.jackson.databind.ObjectMapper;

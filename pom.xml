@@ -52,6 +52,7 @@
             <artifactId>dynamodb</artifactId>
             <version>1.31.0</version>
         </dependency>
+
         <!--        CodeTools-->
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
@@ -104,6 +105,12 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ssm</artifactId>
             <version>2.11.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>ecr</artifactId>
+            <version>1.31.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->

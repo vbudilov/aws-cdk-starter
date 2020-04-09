@@ -1,4 +1,4 @@
-package com.budilov.cdk;
+package com.budilov.cdk.elasticsearch;
 
 import com.budilov.cdk.util.Properties;
 import software.amazon.awscdk.core.Construct;
@@ -13,6 +13,9 @@ import software.amazon.awscdk.services.iam.ServicePrincipal;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Stack that creates an IAM role that would need to be assumed in order to access the ElasticSearch cluster
+ */
 public class ElasticsearchIamStack extends Stack {
 
     public static Role esAccessRole;
