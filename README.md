@@ -5,6 +5,8 @@
 * [Medium](https://medium.com/@budilov)
 * [Twitter](https://twitter.com/VladimirBudilov)
 
+<img src="docs/aws-data-ingest-architecture.jpg" alt="drawing" style="width:200px;"/>
+
 #### Why
 I create apps and deployments all of the time. I use different tools for different scenarios. Sometimes I use the Serverless framework
 to deploy Lambda functions, sometimes SAM. In some cases I used Terraform to create other resources, and it others I just did it manually. 
