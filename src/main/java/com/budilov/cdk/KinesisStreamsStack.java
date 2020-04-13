@@ -18,7 +18,7 @@ public class KinesisStreamsStack extends Stack {
     public KinesisStreamsStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
-        tickerStream = Stream.Builder.create(this, Properties.KINESIS_STREAM_NAME)
+        tickerStream = Stream.Builder.create(this, "TickerStream")
                 .streamName(Properties.KINESIS_STREAM_NAME)
                 .shardCount(Properties.KINESIS_STREAM_SHARD_COUNT)
                 .build();

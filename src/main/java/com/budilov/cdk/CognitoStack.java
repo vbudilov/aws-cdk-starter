@@ -12,8 +12,6 @@ import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.FunctionProps;
 import software.amazon.awscdk.services.lambda.Runtime;
-import software.amazon.awscdk.services.secretsmanager.Secret;
-import software.amazon.awscdk.services.secretsmanager.SecretStringGenerator;
 import software.amazon.awscdk.services.ssm.ParameterTier;
 import software.amazon.awscdk.services.ssm.StringParameter;
 
@@ -28,12 +26,11 @@ import java.util.Map;
  * Simple way to create a Cognito User Pool with Lambda triggers
  */
 public class CognitoStack extends Stack {
+    UserPool pool;
+    UserPoolClient upClient;
     public CognitoStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null, Properties.DDB_USERS_TABLE);
     }
-
-    UserPool pool;
-    UserPoolClient upClient;
 
     public CognitoStack(final Construct scope, final String id, final StackProps props, final String usersTableName) throws IOException {
         super(scope, id, props);

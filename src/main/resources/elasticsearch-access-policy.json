@@ -10,7 +10,6 @@
       "Resource": "arn:aws:es:REGION_REPLACE_ME:ACCOUNT_NAME_REPLACE_ME:domain/ES_DOMAIN_NAME_REPLACE_ME/*"
     },
     {
-      "Sid": "",
       "Effect": "Allow",
       "Principal": {
         "AWS": "*"

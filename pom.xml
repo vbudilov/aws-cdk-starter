@@ -39,66 +39,92 @@
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>core</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>ec2</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
+
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>dynamodb</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <!--        CodeTools-->
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codepipeline</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codebuild</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>codepipeline-actions</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>cognito</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>kinesis</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>s3</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
 
         <dependency>
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>s3-deployment</artifactId>
-            <version>1.31.0</version>
+            <version>1.32.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>ecr</artifactId>
+            <version>1.32.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>eks</artifactId>
+            <version>1.32.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>ecs</artifactId>
+            <version>1.32.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>ecs-patterns</artifactId>
+            <version>1.32.0</version>
+        </dependency>
+
 
         <!--        SSM -->
         <dependency>
@@ -107,11 +133,7 @@
             <version>2.11.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>software.amazon.awscdk</groupId>
-            <artifactId>ecr</artifactId>
-            <version>1.31.0</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>

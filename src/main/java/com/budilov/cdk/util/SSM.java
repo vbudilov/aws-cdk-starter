@@ -8,7 +8,7 @@ import software.amazon.awssdk.services.ssm.model.PutParameterResponse;
 
 public class SSM {
 
-    static private SsmClient client = SsmClient.builder().build();
+    static private final SsmClient client = SsmClient.builder().build();
 
     static public void addParameter(@NotNull String name, @NotNull String value) {
         PutParameterRequest request = PutParameterRequest.builder()

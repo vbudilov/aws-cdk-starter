@@ -1,4 +1,4 @@
-package com.budilov.cdk.eks;
+package com.budilov.cdk.ecs;
 
 import com.budilov.cdk.util.Properties;
 import software.amazon.awscdk.core.Construct;
@@ -17,6 +17,8 @@ import java.util.List;
  */
 public class EcrStack extends Stack {
 
+    public static Repository dataIngestGateway;
+    public static Repository kinesisConsumerService;
     public EcrStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null);
     }
@@ -24,7 +26,7 @@ public class EcrStack extends Stack {
     public EcrStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
 
-        Repository dataIngestGateway = Repository.Builder.create(this, Properties.ECR_DATA_INGEST_GATEWAY_NAME)
+        dataIngestGateway = Repository.Builder.create(this, Properties.ECR_DATA_INGEST_GATEWAY_NAME)
                 .repositoryName(Properties.ECR_DATA_INGEST_GATEWAY_NAME)
                 .lifecycleRules(List.of(LifecycleRule
                         .builder()
@@ -33,7 +35,7 @@ public class EcrStack extends Stack {
                 )
                 .build();
 
-        Repository kinesisConsumerService = Repository.Builder.create(this, Properties.ECR_KINESIS_CONSUMER_NAME)
+        kinesisConsumerService = Repository.Builder.create(this, Properties.ECR_KINESIS_CONSUMER_NAME)
                 .repositoryName(Properties.ECR_KINESIS_CONSUMER_NAME)
                 .lifecycleRules(List.of(LifecycleRule
                         .builder()

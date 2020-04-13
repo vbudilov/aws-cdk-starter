@@ -23,6 +23,7 @@ public class DDBUserTableStack extends Stack {
         super(scope, id, props);
 
         usersTable = new Table(this, Properties.DDB_USERS_TABLE, TableProps.builder()
+                .tableName(Properties.DDB_USERS_TABLE)
                 .partitionKey(Attribute.builder()
                         .name(Properties.DDB_USERS_TABLE_PARTITION_ID)
                         .type(AttributeType.STRING)
@@ -34,6 +35,7 @@ public class DDBUserTableStack extends Stack {
                 .build());
 
         tickerTable = new Table(this, Properties.DDB_TICKERS_TABLE, TableProps.builder()
+                .tableName(Properties.DDB_TICKERS_TABLE)
                 .partitionKey(Attribute.builder()
                         .name(Properties.DDB_TICKERS_TABLE_PARTITION_ID)
                         .type(AttributeType.STRING)

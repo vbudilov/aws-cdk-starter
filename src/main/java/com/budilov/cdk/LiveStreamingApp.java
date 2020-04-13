@@ -1,9 +1,10 @@
 package com.budilov.cdk;
 
-import com.budilov.cdk.eks.EcrStack;
+import com.budilov.cdk.ecs.EcrStack;
+import com.budilov.cdk.ecs.EcsFargateStack;
+import com.budilov.cdk.ecs.EcsIamStack;
 import com.budilov.cdk.elasticsearch.ElasticsearchIamStack;
 import com.budilov.cdk.elasticsearch.ElasticsearchStack;
-import com.budilov.cdk.util.SSM;
 import software.amazon.awscdk.core.App;
 
 public class LiveStreamingApp {
@@ -13,29 +14,27 @@ public class LiveStreamingApp {
         App app = new App();
 
         // DynamoDB Stack
-        DDBUserTableStack ddbUserTableStack = new DDBUserTableStack(app, "UsersTable");
+        DDBUserTableStack ddbUserTableStack = new DDBUserTableStack(app, "TickerDDBTables");
 
         // Kinesis
-        KinesisStreamsStack kinesisStreamsStack = new KinesisStreamsStack(app, "KinesisStream");
+        KinesisStreamsStack kinesisStreamsStack = new KinesisStreamsStack(app, "TickerKinesisStreams");
 
         // Cognito
-        CognitoStack cognitoStack = new CognitoStack(app, "LiveDataStreaming", null, ddbUserTableStack.usersTable.getTableName());
+        CognitoStack cognitoStack = new CognitoStack(app, "TickerCognitoUP", null, ddbUserTableStack.usersTable.getTableName());
 
-        // IAM -- this step needs to go before creating the ES cluster otherwise the cluster will fail...that's why
-        // it was extracted from the ES stack and made into its own stack
-        ElasticsearchIamStack iamStack = new ElasticsearchIamStack(app, "IamES");
+        // ElasticSearch
+        ElasticsearchIamStack iamStack = new ElasticsearchIamStack(app, "TickerIAM");
+        ElasticsearchStack elasticsearchStack = new ElasticsearchStack(app, "TickerES", iamStack.esAccessRole);
+        // before the ES cluster can be created the allowed IAM role needs to be there otherwise the access policy can't be applied
+        elasticsearchStack.addDependency(iamStack);
 
-        // Elasticsearch service
-        ElasticsearchStack elasticsearchStack = new ElasticsearchStack(app, "LiveStreamingES");
-
-        // ECR
-        EcrStack ecrStack = new EcrStack(app, "EcrStack");
-
-
-
+        // Containers
+//        DataIngestGatewayPipelineStack dataIngestGatewayPipeline = new DataIngestGatewayPipelineStack(app, "TickerDataIngestPipelineStack");
+//        EcsVpcStack ecsVpcStack = new EcsVpcStack(app, "TickerEcsVpcStack");
+        EcsIamStack ecsIamStack = new EcsIamStack(app, "TickerEcsIamStack");
+        EcrStack ecrStack = new EcrStack(app, "TickerEcrStack");
+        EcsFargateStack ecsFargateStack = new EcsFargateStack(app, "TickerEcsStack");
 
         app.synth();
-
-
     }
 }

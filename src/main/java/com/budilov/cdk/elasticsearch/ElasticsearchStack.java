@@ -6,7 +6,8 @@ import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.elasticsearch.CfnDomain;
-import software.amazon.awscdk.services.iam.*;
+import software.amazon.awscdk.services.iam.PolicyDocument;
+import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.ssm.ParameterTier;
 import software.amazon.awscdk.services.ssm.StringParameter;
 
@@ -14,18 +15,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 public class ElasticsearchStack extends Stack {
 
     public CfnDomain esDomain;
 
-    public ElasticsearchStack(final Construct scope, final String id) throws IOException {
-        this(scope, id, null);
+    public ElasticsearchStack(final Construct scope, final String id, Role iamAccessRole) throws IOException {
+        this(scope, id, null, iamAccessRole);
     }
 
-    public ElasticsearchStack(final Construct scope, final String id, final StackProps props) throws IOException {
+    public ElasticsearchStack(final Construct scope, final String id, final StackProps props, Role iamAccessRole) throws IOException {
         super(scope, id, props);
 
         esDomain = CfnDomain.Builder.create(this, Properties.ES_NAME)
@@ -34,8 +34,6 @@ public class ElasticsearchStack extends Stack {
                 .elasticsearchClusterConfig(CfnDomain.ElasticsearchClusterConfigProperty.builder()
                         .instanceCount(Properties.ES_INSTANCE_COUNT)
                         .instanceType(Properties.ES_INSTANCE_TYPE)
-//                        .dedicatedMasterCount(2)
-//                        .dedicatedMasterEnabled(true)
                         .build())
                 .accessPolicies(PolicyDocument.fromJson(new ObjectMapper().readValue(Properties.readResourceFileContents("elasticsearch-access-policy.json",
                         Map.of("ACCOUNT_NAME_REPLACE_ME", Properties.ACCOUNT,
@@ -49,7 +47,7 @@ public class ElasticsearchStack extends Stack {
                         .volumeType("standard")
                         .volumeSize(10)
                         .build())
-                .advancedOptions(Map.of())
+//                .advancedOptions(Map.of())
                 .build();
 
         StringParameter.Builder.create(this, "esDomain")
