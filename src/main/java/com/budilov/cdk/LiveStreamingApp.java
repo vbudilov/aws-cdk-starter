@@ -23,7 +23,7 @@ public class LiveStreamingApp {
         CognitoStack cognitoStack = new CognitoStack(app, "TickerCognitoUP", null, ddbUserTableStack.usersTable.getTableName());
 
         // ElasticSearch
-        ElasticsearchIamStack iamStack = new ElasticsearchIamStack(app, "TickerIAM");
+        ElasticsearchIamStack iamStack = new ElasticsearchIamStack(app, "TickerESIAM");
         ElasticsearchStack elasticsearchStack = new ElasticsearchStack(app, "TickerES", iamStack.esAccessRole);
         // before the ES cluster can be created the allowed IAM role needs to be there otherwise the access policy can't be applied
         elasticsearchStack.addDependency(iamStack);
