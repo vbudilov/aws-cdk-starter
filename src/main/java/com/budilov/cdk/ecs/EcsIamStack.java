@@ -49,21 +49,13 @@ public class EcsIamStack extends Stack {
                                 ServicePrincipal.Builder.create("eks").build(),
                                 ServicePrincipal.Builder.create("ecs").build(),
                                 ServicePrincipal.Builder.create("ecs-tasks").build()
-
-
                         )
                 )
-                .managedPolicies(List.of(ManagedPolicy.fromAwsManagedPolicyName("AmazonKinesisFullAccess")))
+                .managedPolicies(List.of(ManagedPolicy.fromAwsManagedPolicyName("AmazonKinesisFullAccess"),
+                        ManagedPolicy.fromAwsManagedPolicyName("AmazonSSMFullAccess")))
                 .roleName(Properties.DATA_INGEST_GATEWAY_ROLE)
                 .build();
 
-        StringParameter.Builder.create(this, "eksDataIngestGatewayRole")
-                .allowedPattern(".*")
-                .description("eksDataIngestGatewayRole")
-                .parameterName("eksDataIngestGatewayRole")
-                .stringValue(dataIngestGatewayRole.getRoleName())
-                .tier(ParameterTier.STANDARD)
-                .build();
     }
 
 }
