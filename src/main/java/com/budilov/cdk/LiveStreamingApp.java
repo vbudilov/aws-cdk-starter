@@ -29,8 +29,6 @@ public class LiveStreamingApp {
         elasticsearchStack.addDependency(iamStack);
 
         // Containers
-//        DataIngestGatewayPipelineStack dataIngestGatewayPipeline = new DataIngestGatewayPipelineStack(app, "TickerDataIngestPipelineStack");
-//        EcsVpcStack ecsVpcStack = new EcsVpcStack(app, "TickerEcsVpcStack");
         EcsIamStack ecsIamStack = new EcsIamStack(app, "TickerEcsIamStack");
         EcrStack ecrStack = new EcrStack(app, "TickerEcrStack");
         EcsFargateStack ecsFargateStack = new EcsFargateStack(app, "TickerEcsStack");

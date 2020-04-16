@@ -19,6 +19,7 @@ public class EcrStack extends Stack {
 
     public static Repository dataIngestGateway;
     public static Repository kinesisConsumerService;
+
     public EcrStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null);
     }

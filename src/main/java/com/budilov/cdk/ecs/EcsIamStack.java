@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class EcsIamStack extends Stack {
 
-    public static Role dataIngestGatewayRole;
-    public static Role tickerNodeRole;
+    static Role dataIngestGatewayRole;
+    static Role tickerNodeRole;
 
     public EcsIamStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null);
@@ -35,9 +35,7 @@ public class EcsIamStack extends Stack {
                                 ServicePrincipal.Builder.create("ec2").build(),
                                 ServicePrincipal.Builder.create("ecs").build(),
                                 ServicePrincipal.Builder.create("ecs-tasks").build()
-
-
-                                )
+                        )
                 )
                 .managedPolicies(List.of(ManagedPolicy.fromAwsManagedPolicyName("AmazonKinesisFullAccess")))
                 .roleName(Properties.TICKER_NODES_ROLE)

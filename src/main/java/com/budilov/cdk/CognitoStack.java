@@ -28,6 +28,7 @@ import java.util.Map;
 public class CognitoStack extends Stack {
     UserPool pool;
     UserPoolClient upClient;
+
     public CognitoStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null, Properties.DDB_USERS_TABLE);
     }

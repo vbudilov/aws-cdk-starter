@@ -1,13 +1,11 @@
 package com.budilov.cdk.eks;
 
-import com.budilov.cdk.ecs.EcsIamStack;
 import com.budilov.cdk.util.Properties;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.ec2.InstanceType;
 import software.amazon.awscdk.services.eks.Cluster;
-import software.amazon.awscdk.services.eks.NodegroupOptions;
 
 import java.io.IOException;
 
@@ -31,13 +29,13 @@ public class EksStack extends Stack {
 
                 .build();
 
-        cluster.addNodegroup("tickerNG", NodegroupOptions.builder()
-                .minSize(2)
-                .maxSize(6)
-                .desiredSize(2)
-                .diskSize(10)
-                .nodeRole(EcsIamStack.tickerNodeRole)
-                .build());
+//        cluster.addNodegroup("tickerNG", NodegroupOptions.builder()
+//                .minSize(2)
+//                .maxSize(6)
+//                .desiredSize(2)
+//                .diskSize(10)
+//                .nodeRole(EcsIamStack.tickerNodeRole)
+//                .build());
 
 
 //        StringParameter.Builder.create(this, "dataIngestGatewayEcr")

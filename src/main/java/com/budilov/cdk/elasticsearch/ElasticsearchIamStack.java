@@ -37,7 +37,7 @@ public class ElasticsearchIamStack extends Stack {
                                 ServicePrincipal.Builder.create("eks").build(),
                                 ServicePrincipal.Builder.create("ecs").build(),
                                 ServicePrincipal.Builder.create("ecs-tasks").build()
-                                )
+                        )
                 )
                 .managedPolicies(List.of(ManagedPolicy.fromAwsManagedPolicyName("AmazonESFullAccess")))
                 .roleName(Properties.ES_ALLOWED_ROLE_NAME)
