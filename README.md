@@ -1,6 +1,7 @@
 # Collection of useful CDK Stacks
 
 ### Author: Vladimir Budilov
+* [YouTube](https://www.youtube.com/channel/UCBl-ENwdTlUsLY05yGgXyxw)
 * [LinkedIn](https://www.linkedin.com/in/vbudilov/)
 * [Medium](https://medium.com/@budilov)
 * [Twitter](https://twitter.com/VladimirBudilov)
