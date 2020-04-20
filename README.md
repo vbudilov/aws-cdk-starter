@@ -31,9 +31,13 @@ popular AWS services.
 
 #### Deployment
 ```
-mvn package
-cdk synth
+# You'll need to package and syth every time you make code changes
+mvn package && cdk synth
+
+# this step should be done once, but only after your first 'mvn package'
 cdk bootstrap
+
+# After the code is built and cdk synth is run, deploy to your account
 cdk deploy "StackName"
 
 # or to deploy all of the Stacks
