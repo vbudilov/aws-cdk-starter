@@ -36,28 +36,12 @@ public class CognitoStack extends Stack {
     public CognitoStack(final Construct scope, final String id, final StackProps props, final String usersTableName) throws IOException {
         super(scope, id, props);
 
-        Function copyUserToDynamoDBLambda = new Function(this, "copyUserToDynamoDBLambda", FunctionProps.builder()
-                .runtime(Runtime.NODEJS_12_X)
-                .handler("index.handler")
-                .code(Code.fromInline(getLambdaFunctionFromFile("cognitoToDynamoDBLambda")))
-                .environment(Map.of("TABLE_NAME", usersTableName,
-                        "REGION", Properties.REGION,
-                        "PARTITION_ID", Properties.DDB_USERS_TABLE_PARTITION_ID,
-                        "SORT_KEY", Properties.DDB_USERS_TABLE_SORT_KEY))
-                .build());
-
-        Function autoConfirmFunction = new Function(this, "autoConfirmFunction", FunctionProps.builder()
-                .runtime(Runtime.NODEJS_12_X)
-                .handler("index.handler")
-                .code(Code.fromInline(getLambdaFunctionFromFile("cognitoAutoConfirmUser")))
-                .build());
-
         pool = UserPool.Builder.create(this, "MyPool")
                 .userPoolName("myPool")
                 .selfSignUpEnabled(true)
                 .lambdaTriggers(UserPoolTriggers.builder()
-                        .postConfirmation(copyUserToDynamoDBLambda) // Copy the user to a DynamoDB Table
-                        .preSignUp(autoConfirmFunction) // Auto-confirm user
+                        .postConfirmation(CognitoLambdaStack.copyUserToDynamoDBLambda) // Copy the user to a DynamoDB Table
+                        .preSignUp(CognitoLambdaStack.autoConfirmFunction) // Auto-confirm user
                         .build())
 //                .userVerification(UserVerificationConfig.builder()
 //                        .emailSubject(Properties.COGNITO_EMAIL_VERIFICATION_SUBJECT)

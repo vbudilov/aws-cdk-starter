@@ -20,7 +20,9 @@ public class LiveStreamingApp {
         KinesisStreamsStack kinesisStreamsStack = new KinesisStreamsStack(app, "TickerKinesisStreams");
 
         // Cognito
+        CognitoLambdaStack cognitoLambdaStack = new CognitoLambdaStack(app, "TickerCognitoLambdaStack");
         CognitoStack cognitoStack = new CognitoStack(app, "TickerCognitoUP", null, ddbUserTableStack.usersTable.getTableName());
+        cognitoStack.addDependency(cognitoLambdaStack);
 
         // ElasticSearch
         ElasticsearchIamStack iamStack = new ElasticsearchIamStack(app, "TickerESIAM");
