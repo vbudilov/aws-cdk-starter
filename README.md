@@ -6,7 +6,7 @@
 * [Medium](https://medium.com/@budilov)
 * [Twitter](https://twitter.com/VladimirBudilov)
 
-<img src="docs/aws-data-ingest-architecture.jpg" alt="drawing" width="500px"/>
+<img src="docs/aws-data-ingest-architecture.jpg" alt="drawing" width="800px"/>
 
 #### Why
 I create apps and deployments all of the time. I use different tools for different scenarios. Sometimes I use the Serverless framework
