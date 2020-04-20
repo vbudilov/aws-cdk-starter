@@ -59,7 +59,7 @@ public class EcsFargateStack extends Stack {
         // Now the container
         ContainerDefinition ingestGatewayContainerDefinition = ingestGatewayTaskDefinition.addContainer("DataIngestGatewayContainer", ContainerDefinitionOptions.builder()
                 .image(ContainerImage.fromEcrRepository(EcrStack.dataIngestGateway))
-                .environment(Map.of("MY_SERVICE_PORT", containerPort.toString(), "KINESIS_STREAM_URL", KinesisStreamsStack.))
+                .environment(Map.of("MY_SERVICE_PORT", containerPort.toString()))
                 .memoryLimitMiB(memory)
                 .cpu(cpu)
                 .logging(LogDriver.awsLogs(AwsLogDriverProps.builder()
