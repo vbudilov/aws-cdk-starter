@@ -22,10 +22,11 @@ popular AWS services.
 - [x] ElasticSearch service
 - [x] IAM role to access Elasticsearch
 - [x] Kinesis Stream
+- [x] ECS Fargate Service
+- [x] ECS Fargate Service IAM roles
+- [x] ECR Repos
+- [x] Saving endpoints into the Parameter Store (for discovery)
 - [ ] S3 Bucket (for SPA hosting)
-- [ ] SPA CodePipeline
-- [ ] EKS (maybe...using eksctl for now)
-- [ ] Saving endpoints into the Parameter Store (for discovery)
 
 #### Deployment
 ```

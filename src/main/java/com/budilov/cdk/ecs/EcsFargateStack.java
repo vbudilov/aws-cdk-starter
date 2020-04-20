@@ -1,5 +1,6 @@
 package com.budilov.cdk.ecs;
 
+import com.budilov.cdk.KinesisStreamsStack;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
@@ -20,16 +21,15 @@ import java.util.Map;
  */
 public class EcsFargateStack extends Stack {
 
-
     public EcsFargateStack(final Construct scope, final String id) throws IOException {
         this(scope, id, null);
     }
 
     public EcsFargateStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
-        Number cpu = 512;
-        Number memory = 1024;
-        Number containerPort = 8080;
+        final Number cpu = 512;
+        final Number memory = 1024;
+        final Number containerPort = 8080;
 
         // VPC
         Vpc vpc = Vpc.Builder.create(this, "TickerVPC")
@@ -49,14 +49,17 @@ public class EcsFargateStack extends Stack {
                 .build();
 
         // Ingest Gateway Configuration
+        // Let's define the task
         FargateTaskDefinition ingestGatewayTaskDefinition = new FargateTaskDefinition(this, "TickersDataIngestGatewayTask", FargateTaskDefinitionProps.builder()
                 .cpu(cpu)
                 .memoryLimitMiB(memory)
                 .taskRole(EcsIamStack.dataIngestGatewayRole)
                 .build());
+
+        // Now the container
         ContainerDefinition ingestGatewayContainerDefinition = ingestGatewayTaskDefinition.addContainer("DataIngestGatewayContainer", ContainerDefinitionOptions.builder()
                 .image(ContainerImage.fromEcrRepository(EcrStack.dataIngestGateway))
-                .environment(Map.of("test", "test"))
+                .environment(Map.of("MY_SERVICE_PORT", containerPort.toString(), "KINESIS_STREAM_URL", KinesisStreamsStack.))
                 .memoryLimitMiB(memory)
                 .cpu(cpu)
                 .logging(LogDriver.awsLogs(AwsLogDriverProps.builder()
@@ -67,6 +70,8 @@ public class EcsFargateStack extends Stack {
                 .containerPort(containerPort)
                 .protocol(Protocol.TCP)
                 .build());
+
+        // Create the Data Ingest Fargate Service
         FargateService tickerGatewayService = new FargateService(this, "TickerGatewayFargateService", FargateServiceProps.builder()
                 .cluster(cluster)
                 .taskDefinition(ingestGatewayTaskDefinition)
