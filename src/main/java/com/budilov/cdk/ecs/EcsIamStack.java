@@ -8,8 +8,6 @@ import software.amazon.awscdk.services.iam.CompositePrincipal;
 import software.amazon.awscdk.services.iam.ManagedPolicy;
 import software.amazon.awscdk.services.iam.Role;
 import software.amazon.awscdk.services.iam.ServicePrincipal;
-import software.amazon.awscdk.services.ssm.ParameterTier;
-import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.IOException;
 import java.util.List;

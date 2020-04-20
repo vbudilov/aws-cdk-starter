@@ -5,15 +5,10 @@ import org.jetbrains.annotations.NotNull;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;
-import software.amazon.awscdk.services.cognito.UserPool;
-import software.amazon.awscdk.services.cognito.UserPoolClient;
-import software.amazon.awscdk.services.cognito.UserPoolTriggers;
 import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.FunctionProps;
 import software.amazon.awscdk.services.lambda.Runtime;
-import software.amazon.awscdk.services.ssm.ParameterTier;
-import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,17 +25,17 @@ public class CognitoLambdaStack extends Stack {
     static Function autoConfirmFunction;
 
     public CognitoLambdaStack(final Construct scope, final String id) throws IOException {
-        this(scope, id, null, Properties.DDB_USERS_TABLE);
+        this(scope, id, null);
     }
 
-    public CognitoLambdaStack(final Construct scope, final String id, final StackProps props, final String usersTableName) throws IOException {
+    public CognitoLambdaStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
 
-         copyUserToDynamoDBLambda = new Function(this, "copyUserToDynamoDBLambda", FunctionProps.builder()
+        copyUserToDynamoDBLambda = new Function(this, "copyUserToDynamoDBLambda", FunctionProps.builder()
                 .runtime(Runtime.NODEJS_12_X)
                 .handler("index.handler")
                 .code(Code.fromInline(getLambdaFunctionFromFile("cognitoToDynamoDBLambda")))
-                .environment(Map.of("TABLE_NAME", usersTableName,
+                .environment(Map.of("TABLE_NAME", Properties.DDB_USERS_TABLE,
                         "REGION", Properties.REGION,
                         "PARTITION_ID", Properties.DDB_USERS_TABLE_PARTITION_ID,
                         "SORT_KEY", Properties.DDB_USERS_TABLE_SORT_KEY))

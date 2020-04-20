@@ -21,7 +21,7 @@ public class LiveStreamingApp {
 
         // Cognito
         CognitoLambdaStack cognitoLambdaStack = new CognitoLambdaStack(app, "TickerCognitoLambdaStack");
-        CognitoStack cognitoStack = new CognitoStack(app, "TickerCognitoUP", null, ddbUserTableStack.usersTable.getTableName());
+        CognitoStack cognitoStack = new CognitoStack(app, "TickerCognitoUP");
         cognitoStack.addDependency(cognitoLambdaStack);
 
         // ElasticSearch

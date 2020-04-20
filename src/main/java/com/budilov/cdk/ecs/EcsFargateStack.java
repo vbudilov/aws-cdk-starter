@@ -1,6 +1,5 @@
 package com.budilov.cdk.ecs;
 
-import com.budilov.cdk.KinesisStreamsStack;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
 import software.amazon.awscdk.core.StackProps;

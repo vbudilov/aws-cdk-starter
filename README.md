@@ -33,7 +33,8 @@ popular AWS services.
 ```
 mvn package
 cdk synth
-cdk deploy StackName
+cdk bootstrap
+cdk deploy "StackName"
 
 # or to deploy all of the Stacks
 cdk deploy "*"

@@ -1,6 +1,5 @@
 package com.budilov.cdk;
 
-import com.budilov.cdk.util.Properties;
 import org.jetbrains.annotations.NotNull;
 import software.amazon.awscdk.core.Construct;
 import software.amazon.awscdk.core.Stack;
@@ -8,17 +7,12 @@ import software.amazon.awscdk.core.StackProps;
 import software.amazon.awscdk.services.cognito.UserPool;
 import software.amazon.awscdk.services.cognito.UserPoolClient;
 import software.amazon.awscdk.services.cognito.UserPoolTriggers;
-import software.amazon.awscdk.services.lambda.Code;
-import software.amazon.awscdk.services.lambda.Function;
-import software.amazon.awscdk.services.lambda.FunctionProps;
-import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.ssm.ParameterTier;
 import software.amazon.awscdk.services.ssm.StringParameter;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Map;
 
 /**
  * @author Vladimir Budilov
@@ -30,10 +24,10 @@ public class CognitoStack extends Stack {
     UserPoolClient upClient;
 
     public CognitoStack(final Construct scope, final String id) throws IOException {
-        this(scope, id, null, Properties.DDB_USERS_TABLE);
+        this(scope, id, null);
     }
 
-    public CognitoStack(final Construct scope, final String id, final StackProps props, final String usersTableName) throws IOException {
+    public CognitoStack(final Construct scope, final String id, final StackProps props) throws IOException {
         super(scope, id, props);
 
         pool = UserPool.Builder.create(this, "MyPool")
