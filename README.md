@@ -38,10 +38,20 @@ mvn package && cdk synth
 cdk bootstrap
 
 # After the code is built and cdk synth is run, deploy to your account
-cdk deploy "StackName"
+# first create the ECR stack. After this step is created make sure you deploy
+# a valid docker image to the 'data-ingest-gateway' repo, otherwise the ECS stack
+# won't deploy (it'll wait for a valid image to show up in that ECR repo)
+cdk deploy "TickerEcrStack"
 
-# or to deploy all of the Stacks
-cdk deploy "*"
+# Then deploy all of the other Stacks
+cdk deploy "TickerDDBTables"
+cdk deploy "TickerKinesisStreams"
+cdk deploy "TickerCognitoLambdaStack"
+cdk deploy "TickerCognitoUP"
+cdk deploy "TickerESIAM"
+cdk deploy "TickerES"
+cdk deploy "TickerEcsIamStack"
+cdk deploy "TickerEcsStack"
 
 ```
 
